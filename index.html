@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gate.js</title>
+    <script src="gate.js"></script>
+</head>
+<body>
+
+<script>
+    var stage = Gate.createStage();
+    var container = new Gate();
+
+    container.addChild(new Gate());
+    container.addChild(new Gate());
+    container.addChild(new Gate());
+
+    stage.addChild(container);
+</script>
+</body>
+</html>
