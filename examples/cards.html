@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Card | Gate.js</title>
+    <meta name="keyword" content="HTML5 CSS3 Transform 3D gate.js cube rotate" />
+    <meta name="description" content="HTML5 CSS3 Transform 3D gate.js cube rotate" />
+    <script src="../gate.js"></script>
+    <style>
+        .card {
+            background: darkgreen;
+            transition: all 1s;
+        }
+    </style>
+</head>
+<body>
+<script>
+    var stage = Gate.createStage();
+    var container = new Gate();
+    var card = [];
+    var timer = [];
+    var length = 30;
+    var i;
+
+    container
+            .setTransformOrigin('50%', '50%', 0)
+            .setWidth(500 + 450)
+            .go();
+
+    for (i = 0; i < length; i++) {
+        card[i] = container.addChild(
+                new Gate()
+                        .setClassName('card')
+                        .enableTransition()
+                        .setWidth(50)
+                        .setHeight(80)
+                        .go()
+        );
+    }
+
+    stage.addChild(container);
+
+    var j, k, t = 0.1, z, f, index = 0;
+
+    function spread() {
+        var i = 0, j = 0, k = 0;
+
+        for (i = 0; i < length; i++) {
+            j = i + '';
+
+            if (i < 10) {
+                k = 0;
+            } else {
+                k = (i + '').substr(0, 1);
+            }
+
+            card[i]
+                    .moveX(40 * 2 * j.substr(-1) + 50)
+                    .moveY(50 + 100 * k)
+                    .go();
+
+        }
+    }
+
+    function pack() {
+        card[index]
+                .setX(0)
+                .setY(0)
+                .go();
+    }
+
+    setTimeout(function() {
+
+        spread();
+
+        setInterval(function() {
+            t += 0.1;
+            z = t.toFixed(1);
+
+            container
+                    .setRotateY(1)
+                    .go();
+
+            if (z > 12 && index < 30) {
+                pack();
+                index++;
+            }
+
+            if (z == 30) {
+                spread();
+            }
+
+        }, 20);
+    }, 1000);
+
+</script>
+</body>
+</html>
