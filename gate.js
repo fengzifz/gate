@@ -243,11 +243,21 @@ Gate.prototype.setScaleY = function(y) {
     return this;
 };
 
+/**
+ * Continued scale X
+ * @param x
+ * @returns {Gate}
+ */
 Gate.prototype.setConScaleX = function(x) {
     this.scaleX += x;
     return this;
 };
 
+/**
+ * Continued scale y
+ * @param y
+ * @returns {Gate}
+ */
 Gate.prototype.setConScaleY = function(y) {
     this.scaleY += y;
     return this;
