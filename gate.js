@@ -17,6 +17,8 @@ function Gate(element) {
     element.style.margin = '0px';
     element.style.padding = '0px';
     element.style.position = 'absolute';
+
+    // TODO: Custom style
     element.style.width = window.innerWidth + 'px';
     element.style.height = window.innerHeight + 'px';
 
@@ -24,6 +26,12 @@ function Gate(element) {
     this.domStyle = element.style;
     this.child = [];
 }
+
+// Gate DOM element
+Gate.prototype.domElement = null;
+
+// Gate DOM's style
+Gate.prototype.style = null;
 
 // Initialize
 Gate.prototype.isInitialize = false;
@@ -46,6 +54,9 @@ Gate.prototype.y = 0;
 Gate.prototype.scaleX = 0;
 // The Y axis scale
 Gate.prototype.scaleY = 0;
+
+// Transform property
+Gate.prototype.transformValue = '__translate __scale';
 
 /**
  * Set dom class name
@@ -113,6 +124,63 @@ Gate.prototype.addChild = function(ele) {
     this.domElement.appendChild(ele.domElement);
     return ele;
 };
+
+/**
+ * Translate on X axis
+ * @param x
+ * @returns {Gate}
+ */
+Gate.prototype.moveX = function(x) {
+    this.x += x;
+    return this;
+};
+
+/**
+ * Translate on Y axis
+ * @param y
+ * @returns {Gate}
+ */
+Gate.prototype.moveY = function(y) {
+    this.y += y;
+    return this;
+};
+
+/**
+ * Set scale on X axis
+ * @param x
+ * @returns {Gate}
+ */
+Gate.prototype.setScaleX = function(x) {
+    this.scaleX = x;
+    return this;
+};
+
+/**
+ * Set Scale on Y axis
+ * @param y
+ * @returns {Gate}
+ */
+Gate.prototype.setScaleY = function(y) {
+    this.scaleY = y;
+    return this;
+};
+
+/**
+ * Update all actions.
+ * @returns {Gate}
+ */
+Gate.prototype.go = function() {
+    this.translate = 'translate(' + this.x + 'px,' + this.y + 'px) ';
+    this.scale = 'scale(' + this.scaleX + ',' + this.scaleY + ') ';
+
+    this.tv = this.transformValue;
+    this.tv = this.tv.replace('__translate', this.translate);
+    this.tv = this.tv.replace('__scale', this.scale);
+
+    this.domStyle[this.transformProperty] = this.tv;
+    return this;
+};
+
 
 /**
  * Create main container div element

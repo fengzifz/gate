@@ -4,18 +4,29 @@
     <meta charset="UTF-8">
     <title>Gate.js</title>
     <script src="gate.js"></script>
+    <style>
+        .a {background: red; transition: all 1s;}
+    </style>
 </head>
 <body>
 
 <script>
     var stage = Gate.createStage();
-    var container = new Gate();
+    var container = new Gate().setClassName('a');
 
     container.addChild(new Gate());
     container.addChild(new Gate());
     container.addChild(new Gate());
 
     stage.addChild(container);
+
+//    setInterval(function() {
+//        container
+//                .moveX(1)
+//                .moveY(2)
+//                .setScaleX(2)
+//                .go();
+//    }, 50);
 </script>
 </body>
 </html>
