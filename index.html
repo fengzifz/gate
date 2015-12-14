@@ -20,13 +20,18 @@
 
     stage.addChild(container);
 
-//    setInterval(function() {
-//        container
-//                .moveX(1)
-//                .moveY(2)
-//                .setScaleX(2)
-//                .go();
-//    }, 50);
+    container
+            .moveX(100)
+            .moveY(200)
+            .go();
+
+    setInterval(function() {
+        container
+                .moveX(1)
+                .moveY(2)
+                .setScaleX(2)
+                .go();
+    }, 50);
 </script>
 </body>
 </html>

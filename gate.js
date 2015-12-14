@@ -17,6 +17,7 @@ function Gate(element) {
     element.style.margin = '0px';
     element.style.padding = '0px';
     element.style.position = 'absolute';
+    element.style[this.browserPrefix + 'TransformStyle'] = 'preserve-3d';
 
     // TODO: Custom style
     element.style.width = window.innerWidth + 'px';
@@ -49,11 +50,15 @@ Gate.prototype.childNum = 0;
 Gate.prototype.x = 0;
 // The Y axis position
 Gate.prototype.y = 0;
+// The Z axis position
+Gate.prototype.z = 0;
 
 // The X axis scale
-Gate.prototype.scaleX = 0;
+Gate.prototype.scaleX = 1;
 // The Y axis scale
-Gate.prototype.scaleY = 0;
+Gate.prototype.scaleY = 1;
+// The Z axis scale
+Gate.prototype.scaleZ = 1;
 
 // Transform property
 Gate.prototype.transformValue = '__translate __scale';
@@ -170,8 +175,8 @@ Gate.prototype.setScaleY = function(y) {
  * @returns {Gate}
  */
 Gate.prototype.go = function() {
-    this.translate = 'translate(' + this.x + 'px,' + this.y + 'px) ';
-    this.scale = 'scale(' + this.scaleX + ',' + this.scaleY + ') ';
+    this.translate = 'translate3d(' + this.x + 'px,' + this.y + 'px,' + this.z + 'px) ';
+    this.scale = 'scale3d(' + this.scaleX + ',' + this.scaleY + ',' + this.scaleZ + ') ';
 
     this.tv = this.transformValue;
     this.tv = this.tv.replace('__translate', this.translate);
