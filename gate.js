@@ -2,6 +2,10 @@
  * Created by damon on 15/12/13.
  */
 
+/**
+ * @param element {object} Such as, document.getElementById('id');
+ * @constructor
+ */
 function Gate(element) {
 
     if (!this.isInitialize) {
@@ -18,10 +22,6 @@ function Gate(element) {
     element.style.padding = '0px';
     element.style.position = 'absolute';
     element.style[this.browserPrefix + 'TransformStyle'] = 'preserve-3d';
-
-    // TODO: Custom style
-    element.style.width = window.innerWidth + 'px';
-    element.style.height = window.innerHeight + 'px';
 
     this.domElement = element;
     this.domStyle = element.style;
@@ -46,6 +46,11 @@ Gate.prototype.browserPrefix = '';
 // The number of this.child
 Gate.prototype.childNum = 0;
 
+// domElement's width, default value is width of window
+Gate.prototype.width = window.innerWidth;
+// domElement's height, default value is height of window
+Gate.prototype.height = window.innerHeight;
+
 // The X axis position
 Gate.prototype.x = 0;
 // The Y axis position
@@ -60,8 +65,35 @@ Gate.prototype.scaleY = 1;
 // The Z axis scale
 Gate.prototype.scaleZ = 1;
 
+// The X axis rotation
+Gate.prototype.rotateX = 0;
+// The Y axis rotation
+Gate.prototype.rotateY = 0;
+// The Z axis rotation
+Gate.prototype.rotateZ = 0;
+
 // Transform property
-Gate.prototype.transformValue = '__translate __scale';
+Gate.prototype.transformValue = '__translate __scale __rotateX __rotateY __rotateZ';
+
+/**
+ * Set domElement width
+ * @param w
+ * @returns {Gate}
+ */
+Gate.prototype.setWidth = function(w) {
+    this.domStyle['width'] = w + 'px';
+    return this;
+};
+
+/**
+ * Set domElement height
+ * @param h
+ * @returns {Gate}
+ */
+Gate.prototype.setHeight = function(h) {
+    this.domStyle['height'] = h + 'px';
+    return this;
+};
 
 /**
  * Set dom class name
@@ -108,7 +140,7 @@ Gate.prototype.removeClassName = function(className) {
  */
 Gate.prototype.setId = function(id) {
     this.domElement.id = id;
-    return id;
+    return this;
 };
 
 /**
@@ -151,6 +183,16 @@ Gate.prototype.moveY = function(y) {
 };
 
 /**
+ * Translate on Z axis
+ * @param z
+ * @returns {Gate}
+ */
+Gate.prototype.moveZ = function(z) {
+    this.z += z;
+    return this;
+};
+
+/**
  * Set scale on X axis
  * @param x
  * @returns {Gate}
@@ -171,16 +213,62 @@ Gate.prototype.setScaleY = function(y) {
 };
 
 /**
+ * Set scale on Z axis
+ * @param z
+ * @returns {Gate}
+ */
+Gate.prototype.setScaleZ = function(z) {
+    this.scaleZ = z;
+    return this;
+};
+
+/**
+ * Set rotation on X axis
+ * @param x
+ * @returns {Gate}
+ */
+Gate.prototype.setRotateX = function(x) {
+    this.rotateX += x;
+    return this;
+};
+
+/**
+ * Set rotation on Y axis
+ * @param y
+ * @returns {Gate}
+ */
+Gate.prototype.setRotateY = function(y) {
+    this.rotateY += y;
+    return this;
+};
+
+/**
+ * Set rotation on Z axis
+ * @param z
+ * @returns {Gate}
+ */
+Gate.prototype.setRotateZ = function(z) {
+    this.rotateZ += z;
+    return this;
+};
+
+/**
  * Update all actions.
  * @returns {Gate}
  */
 Gate.prototype.go = function() {
     this.translate = 'translate3d(' + this.x + 'px,' + this.y + 'px,' + this.z + 'px) ';
     this.scale = 'scale3d(' + this.scaleX + ',' + this.scaleY + ',' + this.scaleZ + ') ';
+    this.rx = 'rotateX(' + this.rotateX + 'deg)';
+    this.ry = 'rotateY(' + this.rotateY + 'deg)';
+    this.rz = 'rotateZ(' + this.rotateZ + 'deg)';
 
     this.tv = this.transformValue;
     this.tv = this.tv.replace('__translate', this.translate);
     this.tv = this.tv.replace('__scale', this.scale);
+    this.tv = this.tv.replace('__rotateX', this.rx);
+    this.tv = this.tv.replace('__rotateY', this.ry);
+    this.tv = this.tv.replace('__rotateZ', this.rz);
 
     this.domStyle[this.transformProperty] = this.tv;
     return this;

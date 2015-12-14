@@ -23,15 +23,23 @@
     container
             .moveX(100)
             .moveY(200)
+            .setWidth(200)
+            .setHeight(500)
             .go();
 
-    setInterval(function() {
+    var bb = setInterval(function() {
         container
                 .moveX(1)
                 .moveY(2)
+                .setHeight(1)
+                .setRotateX(1)
                 .setScaleX(2)
                 .go();
     }, 50);
+
+//    document.onclick = function() {
+//        clearInterval(bb);
+//    };
 </script>
 </body>
 </html>
