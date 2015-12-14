@@ -22,10 +22,14 @@ function Gate(element) {
     element.style.padding = '0px';
     element.style.position = 'absolute';
     element.style[this.browserPrefix + 'TransformStyle'] = 'preserve-3d';
+    element.style.width = this.width + 'px';
+    element.style.height = this.height + 'px';
+    element.style.opacity = this.opacity;
 
     this.domElement = element;
     this.domStyle = element.style;
     this.child = [];
+    console.log(this); // For debug
 }
 
 // Gate DOM element
@@ -46,10 +50,10 @@ Gate.prototype.browserPrefix = '';
 // The number of this.child
 Gate.prototype.childNum = 0;
 
-// domElement's width, default value is width of window
-Gate.prototype.width = window.innerWidth;
-// domElement's height, default value is height of window
-Gate.prototype.height = window.innerHeight;
+// domElement's width
+Gate.prototype.width = 0;
+// domElement's height
+Gate.prototype.height = 0;
 
 // The X axis position
 Gate.prototype.x = 0;
@@ -72,8 +76,21 @@ Gate.prototype.rotateY = 0;
 // The Z axis rotation
 Gate.prototype.rotateZ = 0;
 
+// Opacity
+Gate.prototype.opacity = 1;
+
 // Transform property
 Gate.prototype.transformValue = '__translate __scale __rotateX __rotateY __rotateZ';
+
+/**
+ * Set domElement opacity
+ * @param o
+ * @returns {Gate}
+ */
+Gate.prototype.setOpacity = function(o) {
+    this.domStyle.opacity = o;
+    return this;
+};
 
 /**
  * Set domElement width
@@ -81,7 +98,7 @@ Gate.prototype.transformValue = '__translate __scale __rotateX __rotateY __rotat
  * @returns {Gate}
  */
 Gate.prototype.setWidth = function(w) {
-    this.domStyle['width'] = w + 'px';
+    this.domStyle.width = w + 'px';
     return this;
 };
 
@@ -212,6 +229,16 @@ Gate.prototype.setScaleY = function(y) {
     return this;
 };
 
+Gate.prototype.setConScaleX = function(x) {
+    this.scaleX += x;
+    return this;
+};
+
+Gate.prototype.setConScaleY = function(y) {
+    this.scaleY += y;
+    return this;
+};
+
 /**
  * Set scale on Z axis
  * @param z
@@ -253,6 +280,36 @@ Gate.prototype.setRotateZ = function(z) {
 };
 
 /**
+ * Set X axis position
+ * @param x
+ * @returns {Gate}
+ */
+Gate.prototype.setX = function(x) {
+    this.x += x;
+    return this;
+};
+
+/**
+ * Set Y axis position
+ * @param y
+ * @returns {Gate}
+ */
+Gate.prototype.setY = function(y) {
+    this.y += y;
+    return this;
+};
+
+/**
+ * Set Z axis position
+ * @param z
+ * @returns {Gate}
+ */
+Gate.prototype.setZ = function(z) {
+    this.z += z;
+    return this;
+};
+
+/**
  * Update all actions.
  * @returns {Gate}
  */
@@ -279,19 +336,29 @@ Gate.prototype.go = function() {
  * Create main container div element
  * @returns {Gate}
  */
-Gate.createStage = function() {
+Gate.createStage = function(left, top) {
     var dom = document.createElement('div'),
         style = dom.style;
 
+    if (!Gate.prototype.isInitialize) {
+        Gate.initialize();
+    }
+
+    // Initialize 3D property
+    style[Gate.prototype.browserPrefix + 'Perspective'] = '800px';
+    style[Gate.prototype.browserPrefix + 'PerspectiveOrigin'] = '0 0';
+    style[Gate.prototype.browserPrefix + 'TransformOrigin'] = '0 0';
+    style[Gate.prototype.browserPrefix + 'Transform'] = 'translateZ(0px)';
+
     // Initialize style
     style.position = 'absolute';
-    style.top = '0px';
-    style.left = '0px';
+    style.left = !left ? '0px' : left;
+    style.top = !top ? '0px' : top;
     style.margin = '0px';
     style.padding = '0px';
 
     // Set class name
-    dom.className = 'container';
+    dom.className = 'stage';
 
     // Append to body
     document.body.appendChild(dom);
@@ -310,9 +377,9 @@ Gate.initialize = function() {
         len = supported.length,
         i;
 
-    // Check 2D supported
+    // Check transform supported
     for (i = 0; i < len; i++) {
-        if (supported[i] + 'Transform' in style) {
+        if (supported[i] + 'Perspective' in style || supported[i] + 'Transform' in style) {
             Gate.prototype.isInitialize = true;
             Gate.prototype.transformProperty = supported[i] + 'Transform';
             Gate.prototype.browserPrefix = supported[i];
