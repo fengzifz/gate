@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cube Rotate | Gate.js</title>
+    <meta name="keyword" content="HTML5 CSS3 Transform 3D gate.js cube rotate" />
+    <meta name="description" content="HTML5 CSS3 Transform 3D gate.js cube rotate" />
+    <script src="../gate.js"></script>
+    <style>
+        .front { background: darkred;}
+        .back { background: blue;}
+        .left { background: green;}
+        .right { background: goldenrod;}
+        .up { background: darkmagenta;}
+        .down { background: turquoise;}
+    </style>
+</head>
+<body>
+
+<script>
+    var stage = Gate.createStage('50%', '50%');
+    var container = new Gate();
+
+    var f1 = container.addChild(
+            new Gate()
+                    .setClassName('front')
+                    .setX(-100)
+                    .setY(-100)
+                    .setZ(50)
+                    .setWidth(200)
+                    .setHeight(200)
+                    .setOpacity(0.5)
+                    .go()
+    );
+
+    var f2 = container.addChild(
+            new Gate()
+                    .setClassName('back')
+                    .setX(-100)
+                    .setY(-100)
+                    .setZ(-150)
+                    .setWidth(200)
+                    .setHeight(200)
+                    .setOpacity(0.5)
+                    .go()
+    );
+
+    var f3 = container.addChild(
+            new Gate()
+                    .setClassName('left')
+                    .setWidth(200)
+                    .setHeight(200)
+                    .setX(-200)
+                    .setY(-100)
+                    .setZ(-50)
+                    .setRotateY(90)
+                    .setOpacity(0.5)
+                    .go()
+    );
+
+    var f4 = container.addChild(
+            new Gate()
+                    .setClassName('right')
+                    .setWidth(200)
+                    .setHeight(200)
+                    .setX(0)
+                    .setY(-100)
+                    .setZ(-50)
+                    .setRotateY(90)
+                    .setOpacity(0.5)
+                    .go()
+    );
+
+    var f5 = container.addChild(
+            new Gate()
+                    .setClassName('up')
+                    .setWidth(200)
+                    .setHeight(200)
+                    .setX(-100)
+                    .setY(-200)
+                    .setZ(-50)
+                    .setRotateX(90)
+                    .setOpacity(0.5)
+                    .go()
+    );
+
+    var f6 = container.addChild(
+            new Gate()
+                    .setClassName('down')
+                    .setWidth(200)
+                    .setHeight(200)
+                    .setX(-100)
+                    .setZ(-50)
+                    .setRotateX(90)
+                    .setOpacity(0.5)
+                    .go()
+    );
+
+    stage.addChild(container);
+
+    var t = 0.1;
+    setInterval(function() {
+        t += 0.1;
+        container
+                .setRotateZ(Math.cos(t))
+                .setRotateY(1)
+                .setRotateZ(Math.sin(t))
+                .go();
+
+
+    }, 15);
+</script>
+</body>
+</html>
