@@ -29,7 +29,7 @@ function Gate(element) {
     this.domElement = element;
     this.domStyle = element.style;
     this.child = [];
-    console.log(this); // For debug
+    //console.log(this); // For debug
 }
 
 // Gate DOM element
@@ -79,8 +79,22 @@ Gate.prototype.rotateZ = 0;
 // Opacity
 Gate.prototype.opacity = 1;
 
+Gate.prototype.transition = false;
+
 // Transform property
 Gate.prototype.transformValue = '__translate __scale __rotateX __rotateY __rotateZ';
+
+// Transform origin
+Gate.prototype.transformOrigin = '0 0';
+
+/**
+ * Enable transition
+ * @returns {Gate}
+ */
+Gate.prototype.enableTransition = function() {
+    this.domStyle[this.browserPrefix + 'Transition'] = 'all 1s';
+    return this;
+};
 
 /**
  * Set domElement opacity
@@ -285,7 +299,7 @@ Gate.prototype.setRotateZ = function(z) {
  * @returns {Gate}
  */
 Gate.prototype.setX = function(x) {
-    this.x += x;
+    this.x = x;
     return this;
 };
 
@@ -295,7 +309,7 @@ Gate.prototype.setX = function(x) {
  * @returns {Gate}
  */
 Gate.prototype.setY = function(y) {
-    this.y += y;
+    this.y = y;
     return this;
 };
 
@@ -305,7 +319,31 @@ Gate.prototype.setY = function(y) {
  * @returns {Gate}
  */
 Gate.prototype.setZ = function(z) {
-    this.z += z;
+    this.z = z;
+    return this;
+};
+
+
+/**
+ * Set transform origin
+ * @param x
+ * @param y
+ * @param z
+ * @returns {Gate}
+ */
+Gate.prototype.setTransformOrigin = function(x, y, z) {
+    this.domStyle['transformOrigin'] = x + ' ' + y + ' ' + z;
+    return this;
+};
+
+/**
+ * Set domElement CSS
+ * @param key
+ * @param val
+ * @returns {Gate}
+ */
+Gate.prototype.setCSS = function(key, val) {
+    this.domStyle[key] = val;
     return this;
 };
 
@@ -347,7 +385,7 @@ Gate.createStage = function(left, top) {
     // Initialize 3D property
     style[Gate.prototype.browserPrefix + 'Perspective'] = '800px';
     style[Gate.prototype.browserPrefix + 'PerspectiveOrigin'] = '0 0';
-    style[Gate.prototype.browserPrefix + 'TransformOrigin'] = '0 0';
+    style[Gate.prototype.browserPrefix + 'TransformOrigin'] = this.transformOrigin;
     style[Gate.prototype.browserPrefix + 'Transform'] = 'translateZ(0px)';
 
     // Initialize style
