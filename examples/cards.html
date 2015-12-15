@@ -64,11 +64,30 @@
         }
     }
 
+    function flip() {
+        var i = 0, j = 0;
+
+        for (i = 0; i < length; i++) {
+
+            j = -120;
+            if (i % 2 == 0) {
+                j = 120;
+            }
+
+            card[i].setRotateX(j).go();
+        }
+    }
+
+    function setOpacity(o) {
+        var i = 0;
+
+        for (i = 0; i < length; i++) {
+            card[i].setOpacity(o).go();
+        }
+    }
+
     function pack() {
-        card[index]
-                .setX(0)
-                .setY(0)
-                .go();
+        card[index].setX(0).setY(0).go();
     }
 
     setTimeout(function() {
@@ -90,6 +109,14 @@
 
             if (z == columnNum * 2) {
                 spread();
+            }
+
+            if (z == columnNum * 3) {
+                flip();
+            }
+
+            if (z == columnNum * 4) {
+                setOpacity(0.5);
             }
 
         }, 15);
