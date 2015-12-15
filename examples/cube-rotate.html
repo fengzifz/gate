@@ -13,9 +13,26 @@
         .right { background: goldenrod;}
         .up { background: darkmagenta;}
         .down { background: turquoise;}
+
+        html, body { padding: 0; margin: 0;}
+
+        .header {
+            padding: 20px 20px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 20px;
+            background: #7e7e7e;
+            color: #fff;
+            font-size: 18px;;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
+<div class="header">
+    Cube build with Gate.js
+</div>
 
 <script>
     var stage = Gate.createStage('50%', '50%');
@@ -107,6 +124,21 @@
                 .setRotateZ(Math.sin(t))
                 .go();
 
+        if (t > 5 && t < 20) {
+            f1.moveZ(1).go();
+            f2.moveZ(-1).go();
+        } else if (t > 20 && t < 35) {
+            f3.moveX(-1).go();
+            f4.moveX(1).go();
+        } else if (t > 35 && t < 50) {
+            f5.moveX(1).go();
+            f6.moveX(1).go();
+        } else if (t > 50 && t < 65) {
+            f1.moveZ(-1).moveX(1).go();
+            f2.moveZ(1).moveX(1).go();
+        } else if (t > 65 && t < 95) {
+            f3.moveX(1).go();
+        }
 
     }, 15);
 </script>
