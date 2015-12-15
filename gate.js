@@ -79,6 +79,7 @@ Gate.prototype.rotateZ = 0;
 // Opacity
 Gate.prototype.opacity = 1;
 
+// Transition
 Gate.prototype.transition = false;
 
 // Transform property
