@@ -6,14 +6,30 @@
     <meta name="keyword" content="HTML5 CSS3 Transform 3D gate.js cube rotate" />
     <meta name="description" content="HTML5 CSS3 Transform 3D gate.js cube rotate" />
     <script src="../gate.js"></script>
+    <script src="../js/colorHelper.js"></script>
     <style>
-        .card {
-            background: darkgreen;
-            transition: all 1s;
+        html, body {
+            padding: 0;
+            margin: 0;
+        }
+
+        .header {
+            padding: 20px 20px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 20px;
+            background: #7e7e7e;
+            color: #fff;
+            font-size: 18px;;
+            text-align: center;
         }
     </style>
 </head>
 <body>
+<div class="header">
+    400 DOM build with Gate.js
+</div>
 <script>
     var stage = Gate.createStage();
     var container = new Gate();
@@ -32,11 +48,14 @@
 
     stage.setTransformOrigin('50%', '50%', 0).go();
 
+    var colors = generateColor('#99FFA6','#ff0ff0', length);
+
     for (i = 0; i < length; i++) {
         card[i] = container.addChild(
                 new Gate()
                         .setClassName('card')
                         .enableTransition()
+                        .setCSS('background-color', colors[i])
                         .setWidth(width)
                         .setHeight(height)
                         .go()
