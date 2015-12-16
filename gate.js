@@ -433,10 +433,13 @@ Gate.prototype.go = function() {
 
 /**
  * Create main container div element
+ * @param left
+ * @param top
+ * @param eleId
  * @returns {Gate}
  */
-Gate.createStage = function(left, top) {
-    var dom = document.createElement('div'),
+Gate.createStage = function(left, top, eleId) {
+    var dom = document.getElementById(eleId) || document.createElement('div'),
         style = dom.style;
 
     if (!Gate.prototype.isInitialize) {
