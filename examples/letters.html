@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gate.js</title>
+    <meta name="keyword" content="HTML5 CSS3 Transform 3D gate.js cube rotate" />
+    <meta name="description" content="HTML5 CSS3 Transform 3D gate.js cube rotate" />
+    <script src="../gate.js"></script>
+    <script src="../js/colorHelper.js"></script>
+    <style>
+        html, body { padding: 0; margin: 0;}
+
+        .header {
+            padding: 20px 20px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 20px;
+            background: #7e7e7e;
+            color: #fff;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .active-div {
+            background-color: olivedrab;
+            border-radius: 10px;
+        }
+
+        .letter {
+            background-color: chartreuse;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <span id="num"></span> DOM build with Gate.js
+</div>
+
+<div class="buttons">
+    <a href="javascript:void(0);" id="stop">Stop</a>
+    <a href="javascript:void(0);" id="start">start</a>
+</div>
+
+<script>
+    var stage = Gate.createStage('50%', '50%');
+    var container = new Gate();
+    var balls = [];
+    var letterAxis = [
+        // Letter G
+        [-190, -185], [-200, -205], [-220, -214], [-240, -219], [-260, -220], [-280, -210], [-300, -200], [-310, -180],
+        [-315, -160], [-318, -140], [-320, -120], [-322, -100], [-320, -80], [-310, -63], [-293, -53], [-275, -48],
+        [-255, -45], [-235, -48], [-219, -59], [-210, -75], [-205, -95], [-240, -117], [-220, -114], [-200, -110],
+
+        // Letter A
+        [-100, -110], [-90, -127], [-70, -137], [-50, -143], [-30, -145], [-10, -143], [10, -135], [25, -120], [30, -100],
+        [32, -80], [31, -60], [28, -40], [17, -20], [28, -18], [32, 0], [43, 10], [-104, -90], [-105, -70], [-106, -50], [-104, -30],
+        [-95, -13], [-80, -2], [-60, 3], [-40, 4], [-20, 2], [0, -5],
+
+        // Letter T
+        [100, -100], [120, -100], [140, -100], [160, -100], [180, -100], [200, -100], [220, -100], [160, -120], [160, -140],
+        [160, -80], [160, -60], [160, -40], [160, -20], [160, 0], [165, 20], [183, 30], [203, 30], [220, 20],
+
+        // Letter E
+        [320, -55], [340, -53], [360, -56], [380, -59], [400, -62], [420, -66], [435, -80], [440, -100], [427, -117],
+        [410, -128], [390, -130], [370, -129], [350, -124], [333, -114], [318, -100], [305, -85], [300, -65], [300, -45],
+        [306, -25], [320, -10], [340, 0], [360, 5], [380, 10], [400, 7], [420, 3], [440, -5]
+    ];
+    var length = letterAxis.length;
+    var i = 0;
+    var l, s;
+    var t = 0.1, x = 0, y = 0, z = 0;
+    var colors = generateColor('#99FFA6','#ff0ff0', length);
+
+    document.getElementById('num').innerHTML = length + '';
+
+    container
+            .setTransformOrigin('50%', '50%', 0)
+            .setWidth(window.innerWidth)
+            .go();
+
+    for (i = 0; i < length; i++) {
+        l = letterAxis[i];
+        s = 0.5 + Math.random();
+        balls[i] = container.addChild(
+                new Gate()
+                        .setClassName('letter')
+                        .setX(l[0])
+                        .setY(l[1])
+                        .setWidth(20)
+                        .setHeight(20)
+                        .setScaleX(s)
+                        .setScaleY(s)
+                        .setCSS('background-color', colors[i])
+                        .go()
+        );
+    }
+
+    stage.addChild(container);
+
+    var max = 1, min = -1, spreadTimer, scaleTimer;
+
+    document.getElementById('stop').onclick = function() {
+        initializePos();
+    };
+
+    document.getElementById('start').onclick = function() {
+        spread();
+    };
+
+    scale();
+
+    function scale() {
+        scaleTimer = setInterval(function() {
+            for (i = 0; i < length; i++) {
+                x = Math.sin(Math.random() * 5) + 0.5;
+                balls[i].enableTransition(2, 'ease').setScaleX(x).setScaleY(x).go();
+            }
+        }, 2000);
+    }
+
+
+    function spread() {
+        clearInterval(scaleTimer);
+        spreadTimer = setInterval(function() {
+            t += 0.05;
+
+            for (i = 0; i < length; i++) {
+                x = Math.sin(Math.random());
+                y = Math.cos(Math.random() * 10);
+                balls[i]
+                        .enableTransition(2, 'easing-out')
+                        .goToX((Math.random() * (max - min + 1) + min) * window.innerWidth / 2)
+                        .goToY(y * window.innerHeight / 3)
+                        .go();
+            }
+
+        }, 2000);
+    }
+
+    function initializePos() {
+        for (var i = 0; i < length; i++) {
+            l = letterAxis[i];
+            balls[i].setX(l[0]).setY(l[1]).go();
+        }
+
+        clearInterval(spreadTimer);
+        scale();
+    }
+
+
+</script>
+</body>
+</html>
