@@ -408,6 +408,11 @@ Gate.prototype.goTo = function(x, y, z) {
     return this;
 };
 
+Gate.prototype.goRotateX = function(x) {
+    this.rotateX = x;
+    return this;
+};
+
 /**
  * Update all actions.
  * @returns {Gate}
@@ -439,7 +444,7 @@ Gate.prototype.go = function() {
  * @returns {Gate}
  */
 Gate.createStage = function(left, top, eleId) {
-    var dom = document.getElementById(eleId) || document.createElement('div'),
+    var dom = document.createElement('div'),
         style = dom.style;
 
     if (!Gate.prototype.isInitialize) {
@@ -463,7 +468,11 @@ Gate.createStage = function(left, top, eleId) {
     dom.className = 'stage';
 
     // Append to body
-    document.body.appendChild(dom);
+    if (eleId) {
+        document.getElementById(eleId).appendChild(dom);
+    } else {
+        document.body.appendChild(dom);
+    }
 
     return new Gate(dom);
 };
