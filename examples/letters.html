@@ -31,6 +31,29 @@
             background-color: chartreuse;
             border-radius: 10px;
         }
+
+        .buttons {
+            position: absolute;
+            bottom: 80px;
+            width: 100%;
+            height: 50px;
+            text-align: center;
+        }
+
+        .buttons a {
+            text-decoration: none;
+            color: #eee;
+            font-size: 40px;
+            display: inline-block;
+            padding: 5px 20px;
+            transition: all 1s ease-in-out;
+        }
+
+        .buttons a#start { color: #99FFA6;}
+        .buttons a#stop { color: #ff0ff0;}
+
+        .buttons a#start:hover { color: #ff0ff0;}
+        .buttons a#stop:hover { color: #99FFA6;}
     </style>
 </head>
 <body>
@@ -39,8 +62,8 @@
 </div>
 
 <div class="buttons">
-    <a href="javascript:void(0);" id="stop">Stop</a>
-    <a href="javascript:void(0);" id="start">start</a>
+    <a href="javascript:void(0);" id="start">START</a>
+    <a href="javascript:void(0);" id="stop">STOP</a>
 </div>
 
 <script>
@@ -88,6 +111,7 @@
                         .setClassName('letter')
                         .setX(l[0])
                         .setY(l[1])
+                        .setZ(0)
                         .setWidth(20)
                         .setHeight(20)
                         .setScaleX(s)
@@ -123,29 +147,34 @@
 
     function spread() {
         clearInterval(scaleTimer);
+        clearInterval(spreadTimer);
         spreadTimer = setInterval(function() {
             t += 0.05;
 
             for (i = 0; i < length; i++) {
                 x = Math.sin(Math.random());
                 y = Math.cos(Math.random() * 10);
+                z = Math.tan(Math.random() * 10);
                 balls[i]
-                        .enableTransition(2, 'easing-out')
+                        .enableTransition(2, 'easing-in-out')
                         .goToX((Math.random() * (max - min + 1) + min) * window.innerWidth / 2)
                         .goToY(y * window.innerHeight / 3)
+                        .goToZ(z * 10)
                         .go();
             }
 
-        }, 2000);
+        }, 1900);
     }
 
     function initializePos() {
+        clearInterval(spreadTimer);
+        clearInterval(scaleTimer);
+
         for (var i = 0; i < length; i++) {
             l = letterAxis[i];
-            balls[i].setX(l[0]).setY(l[1]).go();
+            balls[i].setX(l[0]).setY(l[1]).setZ(0).go();
         }
 
-        clearInterval(spreadTimer);
         scale();
     }
 
