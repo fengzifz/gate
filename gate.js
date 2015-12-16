@@ -90,10 +90,16 @@ Gate.prototype.transformOrigin = '0 0';
 
 /**
  * Enable transition
+ * @param time
+ * @param easing
  * @returns {Gate}
  */
-Gate.prototype.enableTransition = function() {
-    this.domStyle[this.browserPrefix + 'Transition'] = 'all 1s';
+Gate.prototype.enableTransition = function(time, easing) {
+
+    if (!time) { time = 1; }
+    if (!easing) { easing = 'ease'; }
+
+    this.domStyle[this.browserPrefix + 'Transition'] = 'all ' + time + 's ' + easing;
     return this;
 };
 
@@ -355,6 +361,38 @@ Gate.prototype.setTransformOrigin = function(x, y, z) {
  */
 Gate.prototype.setCSS = function(key, val) {
     this.domStyle[key] = val;
+    return this;
+};
+
+/**
+ * Go to X
+ * @param x
+ * @returns {Gate}
+ */
+Gate.prototype.goToX = function(x) {
+    this.x = x;
+    return this;
+};
+
+/**
+ * Go to Y
+ * @param y
+ * @returns {Gate}
+ */
+Gate.prototype.goToY = function(y) {
+    this.y = y;
+    return this;
+};
+
+/**
+ * Go to [x, y]
+ * @param x
+ * @param y
+ * @returns {Gate}
+ */
+Gate.prototype.goTo = function(x, y) {
+    this.x = x;
+    this.y = y;
     return this;
 };
 
