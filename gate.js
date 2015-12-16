@@ -385,14 +385,26 @@ Gate.prototype.goToY = function(y) {
 };
 
 /**
- * Go to [x, y]
- * @param x
- * @param y
+ * Go to Z
+ * @param z
  * @returns {Gate}
  */
-Gate.prototype.goTo = function(x, y) {
+Gate.prototype.goToZ = function(z) {
+    this.z = z;
+    return this;
+};
+
+/**
+ * Go to [x, y, z]
+ * @param x
+ * @param y
+ * @param z
+ * @returns {Gate}
+ */
+Gate.prototype.goTo = function(x, y, z) {
     this.x = x;
     this.y = y;
+    this.z = z;
     return this;
 };
 
