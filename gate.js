@@ -311,6 +311,19 @@ Gate.prototype.setRotateZ = function(z) {
 };
 
 /**
+ * @param x
+ * @param y
+ * @param z
+ * @returns {Gate}
+ */
+Gate.prototype.setRotate = function(x, y, z) {
+    this.rotateX += x;
+    this.rotateY += y;
+    this.rotateZ += z;
+    return this;
+};
+
+/**
  * Set X axis position
  * @param x
  * @returns {Gate}
@@ -408,8 +421,46 @@ Gate.prototype.goTo = function(x, y, z) {
     return this;
 };
 
+/**
+ * TODO: Let me think about it...
+ * @param x
+ * @returns {Gate}
+ */
 Gate.prototype.goRotateX = function(x) {
     this.rotateX = x;
+    return this;
+};
+
+/**
+ * TODO: Let me think about it...
+ * @param y
+ * @returns {Gate}
+ */
+Gate.prototype.goRotateY = function(y) {
+    this.rotateY = y;
+    return this;
+};
+
+/**
+ * TODO: Let me think about it...
+ * @param z
+ * @returns {Gate}
+ */
+Gate.prototype.goRotateZ = function(z) {
+    this.rotateZ = z;
+    return this;
+};
+
+/**
+ * @param x
+ * @param y
+ * @param z
+ * @returns {Gate}
+ */
+Gate.prototype.goRotate = function(x, y, z) {
+    this.rotateX = x;
+    this.rotateY = y;
+    this.rotateZ = z;
     return this;
 };
 
