@@ -104,6 +104,15 @@ Gate.prototype.enableTransition = function(time, easing) {
 };
 
 /**
+ * Disable transition
+ * @returns {Gate}
+ */
+Gate.prototype.disableTransition = function() {
+    this.domStyle[this.browserPrefix + 'Transition'] = '';
+    return this;
+};
+
+/**
  * Set domElement opacity
  * @param o
  * @returns {Gate}

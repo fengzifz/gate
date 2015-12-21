@@ -3,45 +3,356 @@
 <head>
     <meta charset="UTF-8">
     <title>Gate.js</title>
+    <link rel="stylesheet" href="css/style.css" />
     <script src="gate.js"></script>
-    <style>
-        .a {background: red; transition: all 1s;}
-    </style>
 </head>
 <body>
 
+<a class="fork-me" href="https://github.com/fengzifz/gate" target="_blank">
+    <img src="./img/forkme.png" alt="gate.js fork-me" />
+</a>
+
+<div class="header">
+    <h1>Gate.<span class="j">j</span><span class="s">s</span></h1>
+    <div class="main-menu">
+        <!--<ul>-->
+            <!--<li><a href="">Home</a></li>-->
+            <!--<li><a href="">Examples</a></li>-->
+            <!--<li><a href=""></a></li>-->
+        <!--</ul>-->
+    </div>
+</div>
+
+<div class="content">
+    <div class="container">
+
+        <h2>旋转</h2>
+
+        <div class="demo clearfix">
+            <h4>x 旋转</h4>
+            <div class="left">
+<pre><code>object
+    .enableTransition()
+    .setRotateX(360)
+    .go();
+</code></pre>
+            </div>
+
+            <div id="demo1" class="right">
+                <div class="buttons">
+                    <a href="javascript:void(0);" class="play" id="play1">PLAY</a>
+                    <a href="javascript:void(0);" class="reset" id="reset1">RESET</a>
+                </div>
+            </div>
+
+            <script>
+                var stage1 = Gate.createStage(0, 0, 'demo1');
+                var container1 = new Gate();
+
+                container1
+                        .setClassName('green')
+                        .setWidth(50)
+                        .setHeight(50)
+                        .go();
+                stage1.addChild(container1);
+
+                document.getElementById('play1').onclick = function() {
+                    container1.enableTransition().setRotateX(360).go();
+                };
+
+                document.getElementById('reset1').onclick = function() {
+                    container1.enableTransition().goRotateX(0).go();
+                };
+            </script>
+        </div>
+
+        <div class="demo clearfix">
+            <h4>y 旋转</h4>
+            <div class="left">
+<pre><code>object
+    .enableTransition()
+    .setRotateY(360)
+    .go();
+</code></pre>
+            </div>
+
+            <div id="demo2" class="right">
+                <div class="buttons">
+                    <a href="javascript:void(0);" class="play" id="play2">Play</a>
+                    <a href="javascript:void(0);" class="reset" id="reset2">Reset</a>
+                </div>
+            </div>
+
+            <script>
+                var stage2 = Gate.createStage(0, 0, 'demo2');
+                var container2 = new Gate();
+
+                container2
+                        .setClassName('green')
+                        .setWidth(50)
+                        .setHeight(50)
+                        .go();
+                stage2.addChild(container2);
+
+                document.getElementById('play2').onclick = function() {
+                    container2.enableTransition().setRotateY(360).go();
+                };
+
+                document.getElementById('reset2').onclick = function() {
+                    container2.enableTransition().goRotateY(0).go();
+                };
+            </script>
+        </div>
+
+        <div class="demo clearfix">
+            <h4>z 旋转</h4>
+            <div class="left">
+<pre><code>object
+    .enableTransition()
+    .setRotateZ(360)
+    .go();
+</code></pre>
+            </div>
+
+            <div id="demo3" class="right">
+                <div class="buttons">
+                    <a href="javascript:void(0);" class="play" id="play3">Play</a>
+                    <a href="javascript:void(0);" class="reset" id="reset3">Reset</a>
+                </div>
+            </div>
+
+            <script>
+                var stage3 = Gate.createStage(0, 0, 'demo3');
+                var container3 = new Gate();
+
+                container3
+                        .setClassName('green')
+                        .setWidth(50)
+                        .setHeight(50)
+                        .go();
+                stage3.addChild(container3);
+
+                document.getElementById('play3').onclick = function() {
+                    container3.enableTransition().setRotateZ(360).go();
+                };
+
+                document.getElementById('reset3').onclick = function() {
+                    container3.enableTransition().goRotateZ(0).go();
+                };
+            </script>
+        </div>
+
+        <div class="demo clearfix">
+            <h4>x, y, z 旋转</h4>
+            <div class="left">
+<pre><code>object
+    .enableTransition()
+    .setRotate(180, 270, 360)
+    .go();
+</code></pre>
+            </div>
+
+            <div id="demo4" class="right">
+                <div class="buttons">
+                    <a href="javascript:void(0);" class="play" id="play4">Play</a>
+                    <a href="javascript:void(0);" class="reset" id="reset4">Reset</a>
+                </div>
+            </div>
+
+            <script>
+                var stage4 = Gate.createStage(0, 0, 'demo4');
+                var container4 = new Gate();
+
+                container4
+                        .setClassName('green')
+                        .setWidth(50)
+                        .setHeight(50)
+                        .go();
+                stage4.addChild(container4);
+
+                document.getElementById('play4').onclick = function() {
+                    container4.enableTransition().setRotate(180, 270, 360).go();
+                };
+
+                document.getElementById('reset4').onclick = function() {
+                    container4.enableTransition().goRotate(0, 0, 0).go();
+                };
+            </script>
+        </div>
+
+        <h2>移动</h2>
+
+        <div class="demo clearfix">
+            <h4>x 移动</h4>
+            <div class="left">
+<pre><code>object
+    .enableTransition()
+    .moveX(300)
+    .go();
+</code></pre>
+            </div>
+
+            <div id="demo5" class="right">
+                <div class="buttons">
+                    <a href="javascript:void(0);" class="play" id="play5">Play</a>
+                    <a href="javascript:void(0);" class="reset" id="reset5">Reset</a>
+                </div>
+            </div>
+
+            <script>
+                var stage5 = Gate.createStage(0, 0, 'demo5');
+                var container5 = new Gate();
+
+                container5
+                        .setClassName('green')
+                        .setWidth(50)
+                        .setHeight(50)
+                        .go();
+                stage5.addChild(container5);
+
+                document.getElementById('play5').onclick = function() {
+                    container5.enableTransition().moveX(300).go();
+                };
+
+                document.getElementById('reset5').onclick = function() {
+                    container5.enableTransition().goToX(0).go();
+                };
+            </script>
+        </div>
+
+        <div class="demo clearfix">
+            <h4>y 移动</h4>
+            <div class="left">
+<pre><code>object
+    .enableTransition()
+    .moveY(-100)
+    .go();
+</code></pre>
+            </div>
+
+            <div id="demo6" class="right">
+                <div class="buttons">
+                    <a href="javascript:void(0);" class="play" id="play6">Play</a>
+                    <a href="javascript:void(0);" class="reset" id="reset6">Reset</a>
+                </div>
+            </div>
+
+            <script>
+                var stage6 = Gate.createStage(0, 0, 'demo6');
+                var container6 = new Gate();
+
+                container6
+                        .setClassName('green')
+                        .setWidth(50)
+                        .setHeight(50)
+                        .go();
+                stage6.addChild(container6);
+
+                document.getElementById('play6').onclick = function() {
+                    container6.enableTransition().moveY(-100).go();
+                };
+
+                document.getElementById('reset6').onclick = function() {
+                    container6.enableTransition().goToY(0).go();
+                };
+            </script>
+        </div>
+
+        <div class="demo clearfix">
+            <h4>z 移动</h4>
+            <div class="left">
+<pre><code>object
+    .enableTransition()
+    .moveZ(300)
+    .go();
+</code></pre>
+            </div>
+
+            <div id="demo7" class="right">
+                <div class="buttons">
+                    <a href="javascript:void(0);" class="play" id="play7">Play</a>
+                    <a href="javascript:void(0);" class="reset" id="reset7">Reset</a>
+                </div>
+            </div>
+
+            <script>
+                var stage7 = Gate.createStage(0, 0, 'demo7');
+                var container7 = new Gate();
+
+                container7
+                        .setClassName('green')
+                        .setWidth(50)
+                        .setHeight(50)
+                        .go();
+                stage7.addChild(container7);
+
+                document.getElementById('play7').onclick = function() {
+                    container7.enableTransition().moveZ(300).go();
+                };
+
+                document.getElementById('reset7').onclick = function() {
+                    container7.enableTransition().goToZ(0).go();
+                };
+            </script>
+        </div>
+
+        <div class="demo clearfix">
+            <h4>圆轨迹移动</h4>
+            <div class="left">
+<pre><code>var t = 0.05;
+setInterval(function() {
+    t += 0.05;
+    object
+        .disableTransition()
+        .moveX(3 * Math.sin(t))
+        .moveY(3 * Math.cos(t))
+        .go();
+}, 15);
+</code></pre>
+            </div>
+
+            <div id="demo8" class="right">
+                <div class="buttons">
+                    <a href="javascript:void(0);" class="play" id="play8">Play</a>
+                    <a href="javascript:void(0);" class="reset" id="reset8">Reset</a>
+                </div>
+            </div>
+
+            <script>
+                var stage8 = Gate.createStage(0, 0, 'demo8');
+                var container8 = new Gate();
+                var t = 0.05;
+                var timer = 0;
+
+                container8
+                        .setClassName('green ball')
+                        .setWidth(50)
+                        .setHeight(50)
+                        .go();
+                stage8.addChild(container8);
+
+                document.getElementById('play8').onclick = function() {
+                    timer = setInterval(function() {
+                        t += 0.05;
+                        container8.disableTransition().moveX(3 * Math.sin(t)).moveY(3 * Math.cos(t)).go();
+                    }, 15);
+                };
+
+                document.getElementById('reset8').onclick = function() {
+                    clearInterval(timer);
+                    container8.enableTransition().goTo(0, 0, 0).go();
+                };
+            </script>
+        </div>
+
+
+
+    </div>
+</div>
+
+<div class="footer"></div>
+
 <script>
-    var stage = Gate.createStage();
-    var container = new Gate().setClassName('a');
-
-    container.addChild(new Gate());
-    container.addChild(new Gate());
-    container.addChild(new Gate());
-
-    stage.addChild(container);
-
-    container
-            .moveX(100)
-            .moveY(200)
-            .setWidth(200)
-            .setHeight(500)
-            .go();
-
-    var t = 0.1;
-    var bb = setInterval(function() {
-        t += 0.1;
-        container
-                .moveX(Math.sin(t))
-                .moveY(Math.cos(t))
-                .setHeight(1)
-                .setRotateX(1)
-                .setScaleX(Math.cos(t))
-                .go();
-    }, 50);
-
-    document.onclick = function() {
-        clearInterval(bb);
-    };
 </script>
 </body>
 </html>
