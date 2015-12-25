@@ -3,8 +3,185 @@
 <head>
     <meta charset="UTF-8">
     <title>Gate.js</title>
-    <link rel="stylesheet" href="css/style.css" />
-    <script src="gate.js"></script>
+    <style>
+        html,
+        body {
+            padding: 0;
+            margin: 0;
+        }
+
+        .container {
+            width: 900px;
+            min-height: 500px;
+            background: #eee;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .main-menu {
+            width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .main-menu ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        .main-menu li {
+            list-style: none;
+            float: left;
+            margin-right: 30px;
+        }
+
+        .main-menu li a {
+            text-decoration: none;
+        }
+
+        .header {
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            text-align: center;
+            font-size: 150px;
+            height: 150px;
+            margin: 70px auto 30px;
+            /*color: #b5b5b5;*/
+            font-family: Raleway, HelveticaNeue, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+
+        .header h1 .j {
+            /*color: #99FFA6;*/
+            color: #33C3F0;
+        }
+
+        .header h1 .s {
+            /*color: #ff0ff0;*/
+            color: #33C3F0;
+        }
+
+        .demo {
+            margin-bottom: 50px;
+        }
+
+        .demo .left,
+        .demo .right {
+            float: left;
+        }
+
+        .demo .left {
+            width: 300px;
+            border-radius: 5px;
+            padding: 10px 20px;
+        }
+
+        .demo .right {
+            width: 500px;
+            position: relative;
+            min-height: 100px;
+        }
+
+        .code {
+            font-family: monospace;
+        }
+
+        .demo .buttons {
+            position: absolute;
+            bottom: 0;
+        }
+
+        .demo .buttons a {
+            text-decoration: none;
+            display: inline-block;
+            margin-right: 20px;
+            color: #fff;
+            background-color: #33C3F0;
+            transition: all 1s;
+            padding: 10px 30px;
+            border-radius: 5px;
+        }
+
+        .demo .buttons a:hover {
+            background-color: #17b1f0;
+        }
+
+        .clearfix:after {
+            content: " ";
+            display: block;
+            clear: both;
+            height: 0;
+        }
+        .clearfix {
+            zoom: 1;
+        }
+
+        .green {
+            background: #7A8CA0;
+        }
+
+        .ball {
+            -webkit-border-radius: 25px;
+            -moz-border-radius: 25px;
+            border-radius: 25px;
+        }
+
+        .fork-me {
+            display: block;
+            width: 149px;
+            height: 149px;
+            position: fixed;
+            left: 0;
+            top: 0;
+        }
+
+        .examples {
+            width: 900px;
+            margin: 0 auto 30px;
+        }
+
+        .example {
+            float: left;
+            margin-right: 20px;
+            width: 270px;
+        }
+
+        .example .img {
+            border: 1px solid #eee;
+        }
+
+        .examples .info {
+            border: 1px solid #eee;
+            padding: 10px;
+            border-top: none;
+            text-align: center;
+        }
+
+        .examples .info a {
+            text-decoration: none;
+            color: #33C3F0;
+        }
+
+        .example img {
+            width: 100%;
+        }
+
+        .description {
+            width: 900px;
+            margin: 50px auto 0;
+        }
+
+        hr {
+            display: block;
+            height: 1px;
+            border: 0;
+            border-top: 1px solid #c5c5c5;
+            margin: 1em 0;
+            padding: 0;
+        }
+    </style>
+    <script src="./gate.js"></script>
 </head>
 <body>
 
@@ -13,18 +190,79 @@
 </a>
 
 <div class="header">
-    <h1>Gate.<span class="j">j</span><span class="s">s</span></h1>
-    <div class="main-menu">
-        <!--<ul>-->
-            <!--<li><a href="">Home</a></li>-->
-            <!--<li><a href="">Examples</a></li>-->
-            <!--<li><a href=""></a></li>-->
-        <!--</ul>-->
+    <h1>
+        <span id="g">G</span>
+        <span id="a">a</span>
+        <span id="lt">t</span>
+        <span id="e">e</span>
+        <span id="dot">.</span>
+        <span id="j" class="j">j</span>
+        <span id="s" class="s">s</span>
+    </h1>
+    <script>
+        var baseTime = 1000;
+        var baseX = -400;
+        var g = new Gate(document.getElementById('g')).setWidth(100).setHeight(200).setX(baseX + 50).go();
+        var a = new Gate(document.getElementById('a')).setWidth(100).setHeight(200).setX(baseX + 170).go();
+        var lt = new Gate(document.getElementById('lt')).setWidth(100).setHeight(200).setX(baseX + 260).go();
+        var e = new Gate(document.getElementById('e')).setWidth(100).setHeight(200).setX(baseX + 350).go();
+        var dot = new Gate(document.getElementById('dot')).setWidth(100).setHeight(200).setX(baseX + 430).go();
+        var j = new Gate(document.getElementById('j')).setWidth(100).setHeight(200).setX(baseX + 500).go();
+        var s = new Gate(document.getElementById('s')).setWidth(100).setHeight(200).setX(baseX + 580).go();
+
+        window.onload = function() {
+            var delT = 0.1;
+            setInterval(function() {
+                delT += 0.1;
+//                g.setRotateZ(1).go();
+//                a.setScaleX(Math.cos(delT)).go();
+                lt.setRotateZ(Math.cos(delT)).go();
+                e.setRotateX(Math.sin(delT)).go();
+                dot.moveY(-Math.sin(delT)).go();
+            }, 15);
+        }
+    </script>
+
+    <div class="description">
+        <p>Gate.js 是一个轻量级的 JavaScript 库，用来创建和管理 3D Transform，压缩后只有 5kb，它不依赖于任何第三方库。</p>
+        <p>我们可以直接通过 Gate.js 来创建 HTML 并指定它该执行什么动画。</p>
+
+        <hr />
     </div>
+
+    <!--<div class="main-menu">-->
+    <!--</div>-->
+
 </div>
 
 <div class="content">
+
+    <div class="examples clearfix">
+        <h2>有趣的示例</h2>
+        <div class="example">
+            <div class="img">
+                <img src="./img/20151224100818.jpg" />
+            </div>
+            <div class="info"><a href="http://www.chenzifeng.net/page/detail/4">点击查看</a></div>
+        </div>
+        <div class="example">
+            <div class="img">
+                <img src="./img/20151224100824.jpg" />
+            </div>
+            <div class="info"><a href="http://www.chenzifeng.net/page/detail/2">点击查看</a></div>
+        </div>
+        <div class="example">
+            <div class="img">
+                <img src="./img/20151224100847.jpg" />
+            </div>
+            <div class="info"><a href="http://www.chenzifeng.net/page/detail/3">点击查看</a></div>
+        </div></div>
+
     <div class="container">
+
+        <h2>以下是一些简单的例子</h2>
+
+        <hr />
 
         <h2>旋转</h2>
 
@@ -300,14 +538,14 @@
             <h4>圆轨迹移动</h4>
             <div class="left">
 <pre><code>var t = 0.05;
-setInterval(function() {
+    setInterval(function() {
     t += 0.05;
     object
-        .disableTransition()
-        .moveX(3 * Math.sin(t))
-        .moveY(3 * Math.cos(t))
-        .go();
-}, 15);
+    .disableTransition()
+    .moveX(3 * Math.sin(t))
+    .moveY(3 * Math.cos(t))
+    .go();
+    }, 15);
 </code></pre>
             </div>
 
