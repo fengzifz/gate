@@ -4,10 +4,10 @@ It perform animations using DOM element, not <canvas>. It has no dependencies.
 
 ## Live Demo
 
-- Simple examples
-- Cards 
-- Cube
-- Letters
+- [Simple examples](http://fengzifz.github.io/lab/gate/)
+- [Cards](http://fengzifz.github.io/lab/gate/examples/cards.html)
+- [Cube](http://fengzifz.github.io/lab/gate/examples/cube-rotate.html)
+- [Letters](http://fengzifz.github.io/lab/gate/examples/letters.html)
 
 ## Usage
 
