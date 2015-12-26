@@ -2,7 +2,7 @@
 A small library for generating CSS 3D transforms.
 It perform animations using DOM element, not <canvas>. It has no dependencies.
 
-## Live Demo
+## Live Demos
 
 - [Simple examples](http://fengzifz.github.io/lab/gate/)
 - [Cards](http://fengzifz.github.io/lab/gate/examples/cards.html)
@@ -91,7 +91,7 @@ container
 - `setScaleX(x)` - Set scale value round X axis
 - `setScaleY(y)` - Set scale value round Y axis
 
-### CSS operation
+### CSS operations
 - `setCSS(key, value)` - Set CSS for DOM
 - `setOpacity(o)` - Set the opacity for DOM
 
